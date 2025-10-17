@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="fr">
 <head>
@@ -55,12 +54,28 @@
     footer{margin-top:40px;padding:18px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,0.03)}
 
     /* Modal */
-    .modal-back{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:none;align-items:center;justify-content:center;padding:20px}
+    .modal-back{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:999}
     .modal{max-width:640px;width:100%;background:#061226;padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.04)}
     .modal h3{margin-top:0}
     .flex{display:flex;gap:12px}
     .input,textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit}
     .muted{color:var(--muted);font-size:13px}
+
+    /* Toast */
+    #toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(124, 58, 237, 0.9);
+      color: white;
+      padding: 14px 20px;
+      border-radius: 10px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+      z-index: 1000;
+    }
+    #toast.show { opacity: 1; transform: translateY(0); }
 
     /* responsive */
     @media (max-width:980px){
@@ -138,13 +153,11 @@
             <div class="features">Coupe, transitions, mixage audio, étalonnage, sous-titres, versions pour réseaux sociaux.</div>
             <p style="margin-top:12px"><button class="btn" onclick="openOrder('Montage vidéo')">Commander</button></p>
           </div>
-
           <div class="service">
             <h3>Graphisme & Miniatures</h3>
             <div class="features">Miniatures YouTube, bannières, logos, motion design court, packs branding.</div>
             <p style="margin-top:12px"><button class="btn" onclick="openOrder('Graphisme')">Commander</button></p>
           </div>
-
           <div class="service">
             <h3>Développement web</h3>
             <div class="features">Site vitrine, landing page, optimisation SEO basique, intégration CMS (WordPress).</div>
@@ -202,7 +215,9 @@
         <div style="display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:12px">
           <div>
             <p class="muted">Envoyez un brief ou demandez un devis — on répond généralement en 24–48h (jours ouvrés).</p>
-            <form id="contactForm" onsubmit="submitContact(event)">
+            <!-- Formulaire Netlify -->
+            <form id="contactForm" name="contact" method="POST" data-netlify="true" onsubmit="handleSubmit(event)">
+              <input type="hidden" name="form-name" value="contact">
               <div style="margin-bottom:8px"><input required class="input" name="name" placeholder="Votre nom"></div>
               <div style="margin-bottom:8px"><input required type="email" class="input" name="email" placeholder="Email"></div>
               <div style="margin-bottom:8px"><textarea required rows="5" class="input" name="message" placeholder="Décrivez votre projet..."></textarea></div>
@@ -229,12 +244,13 @@
     </footer>
   </div>
 
-  <!-- Modal -->
+  <!-- Modal de commande -->
   <div class="modal-back" id="modalBack">
     <div class="modal" role="dialog" aria-modal="true">
       <h3>Commander un service</h3>
       <p class="muted" id="selectedService">Choisir un service...</p>
-      <form id="orderForm" onsubmit="submitOrder(event)">
+      <form id="orderForm" name="order" method="POST" data-netlify="true" onsubmit="handleSubmit(event)">
+        <input type="hidden" name="form-name" value="order">
         <div style="margin-bottom:8px"><input class="input" id="clientName" name="clientName" placeholder="Nom complet" required></div>
         <div style="margin-bottom:8px"><input class="input" id="clientEmail" name="clientEmail" type="email" placeholder="Email" required></div>
         <div style="margin-bottom:8px"><select class="input" id="serviceSelect" name="service">
@@ -251,8 +267,11 @@
     </div>
   </div>
 
+  <!-- Toast notification -->
+  <div id="toast">Merci ! Votre message a été envoyé.</div>
+
   <script>
-    // modal
+    // Modal
     const modalBack = document.getElementById('modalBack');
     const selectedService = document.getElementById('selectedService');
     function openOrder(service){
@@ -266,40 +285,49 @@
     document.getElementById('orderBtn2').addEventListener('click', ()=>openOrder('Graphisme'));
     document.getElementById('quickOrder').addEventListener('click', ()=>openOrder('Starter'));
 
-    // order submit (demo) — adapt to backend
-    function submitOrder(e){
-      e.preventDefault();
-      const data = {
-        name: document.getElementById('clientName').value,
-        email: document.getElementById('clientEmail').value,
-        service: document.getElementById('serviceSelect').value,
-        brief: document.getElementById('brief').value,
-      };
-      console.log('Order',data);
-      alert('Merci — votre demande a été envoyée. Nous reviendrons vers vous par email. (demo)');
-      closeModal();
-      e.target.reset();
-    }
-
-    // contact form demo
-    function submitContact(e){
-      e.preventDefault();
-      const f = e.target;
-      console.log('Contact', {name:f.name.value,email:f.email.value,message:f.message.value});
-      alert('Merci — message envoyé. (demo)');
-      f.reset();
-    }
-
-    // accessibility: close modal on escape
+    // Close modal on Escape
     document.addEventListener('keydown', (ev)=>{
       if(ev.key === 'Escape') closeModal();
     });
 
-    // small progressive enhancement: scroll reveal
+    // Toast function
+    function showToast(message){
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(()=>toast.classList.remove('show'), 4000);
+    }
+
+    // Handle Netlify forms
+    function handleSubmit(e){
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+      fetch("/", {
+        method: "POST",
+        body: data
+      }).then(()=>{
+        showToast("Merci ! Votre message a été envoyé.");
+        form.reset();
+        closeModal();
+      }).catch(err=>{
+        showToast("Erreur lors de l'envoi. Réessayez.");
+        console.error(err);
+      });
+    }
+
+    // Small progressive enhancement: scroll reveal
     window.addEventListener('load', ()=>{
-      document.querySelectorAll('section').forEach((s,i)=>{s.style.opacity=0;s.style.transform='translateY(8px)';setTimeout(()=>{s.style.transition='all .6s ease';s.style.opacity=1;s.style.transform='none'},120*i)})
+      document.querySelectorAll('section').forEach((s,i)=>{
+        s.style.opacity=0;
+        s.style.transform='translateY(8px)';
+        setTimeout(()=>{
+          s.style.transition='all .6s ease';
+          s.style.opacity=1;
+          s.style.transform='none';
+        },120*i)
+      })
     });
   </script>
 </body>
 </html>
-
