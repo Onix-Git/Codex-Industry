@@ -1,166 +1,305 @@
+
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Codex Industry — Services pro vidéo · graphisme · web</title>
-<style>
-:root{
-  --bg:#0f1724;--card:#0b1220;--accent:#7c3aed;--muted:#94a3b8;--radius:14px;--shadow:0 6px 20px rgba(2,6,23,0.6);
-  font-family:Inter,system-ui,Arial,sans-serif
-}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#071124,#0f1724);color:#e6eef8}
-a{color:inherit;text-decoration:none}
-.container{max-width:1100px;margin:0 auto;padding:28px}
-header{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-.brand{display:flex;align-items:center;gap:12px}
-.logo-img{width:52px;height:52px;border-radius:10px;object-fit:cover;box-shadow:var(--shadow)}
-nav{display:flex;gap:18px;align-items:center}
-.btn{background:var(--accent);border:none;padding:10px 14px;border-radius:10px;color:#fff;font-weight:600;cursor:pointer}
-.ghost{background:transparent;border:1px solid rgba(255,255,255,.06);padding:10px 12px;border-radius:10px;color:var(--muted)}
-.hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:32px 0}
-.hero h1{font-size:40px;margin:0 0 12px}.hero p{color:var(--muted);line-height:1.55;margin:0 0 18px}
-.cards{display:flex;flex-direction:column;gap:12px}.card{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--shadow);display:flex;gap:12px;align-items:center}
-.card strong{display:block}
-.services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
-.service{background:linear-gradient(180deg,rgba(255,255,255,.02),transparent);padding:20px;border-radius:14px}
-.features{color:var(--muted);font-size:14px}
-.pricing{display:flex;gap:14px;margin-top:22px}.price{flex:1;background:rgba(255,255,255,.04);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,.03)}
-.price .amount{font-size:22px;font-weight:700}
-.portfolio{margin-top:30px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.thumb{background:#071425;height:120px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px}
-footer{margin-top:40px;padding:18px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.03)}
-.modal-back{position:fixed;inset:0;background:rgba(2,6,23,.6);display:none;align-items:center;justify-content:center;padding:20px}
-.modal{max-width:640px;width:100%;background:#061226;padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,.04)}
-.input,textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,.06);background:transparent;color:inherit}
-.muted{color:var(--muted);font-size:13px}
-@media(max-width:980px){.hero{grid-template-columns:1fr}.services{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.grid{grid-template-columns:1fr}nav{display:none}}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Codex Industry — Services : Montage vidéo · Graphisme · Dév web</title>
+  <meta name="description" content="Codex Industry — Vente de services : montage vidéo, création de miniatures & graphisme, développement web sur mesure." />
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --accent:#7c3aed; --muted:#94a3b8; --glass:rgba(255,255,255,0.04);
+      --radius:14px; --maxw:1100px;
+      --shadow: 0 6px 20px rgba(2,6,23,0.6);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#071124 0%,var(--bg) 100%);color:#e6eef8}
+    a{color:inherit}
+    .container{max-width:var(--maxw);margin:0 auto;padding:28px}
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#06b6d4);display:flex;align-items:center;justify-content:center;font-weight:700;box-shadow:var(--shadow)}
+    nav{display:flex;gap:18px;align-items:center}
+    .btn{background:var(--accent);border:none;padding:10px 14px;border-radius:10px;color:white;font-weight:600;cursor:pointer}
+    .ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 12px;border-radius:10px;color:var(--muted)}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:32px 0}
+    .hero h1{font-size:40px;margin:0 0 12px}
+    .hero p{color:var(--muted);line-height:1.55;margin:0 0 18px}
+    .cards{display:flex;flex-direction:column;gap:12px}
+    .card{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--shadow);display:flex;gap:12px;align-items:center}
+    .card strong{display:block}
+
+    /* Services */
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
+    .service{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:20px;border-radius:14px}
+    .service h3{margin:0 0 10px}
+    .features{color:var(--muted);font-size:14px}
+
+    /* Pricing */
+    .pricing{display:flex;gap:14px;margin-top:22px}
+    .price{flex:1;background:var(--glass);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .price h4{margin:0 0 10px}
+    .price .amount{font-size:22px;font-weight:700}
+
+    /* Portfolio */
+    .portfolio{margin-top:30px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .thumb{background:#071425;height:120px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px}
+
+    /* Footer */
+    footer{margin-top:40px;padding:18px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,0.03)}
+
+    /* Modal */
+    .modal-back{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:none;align-items:center;justify-content:center;padding:20px}
+    .modal{max-width:640px;width:100%;background:#061226;padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.04)}
+    .modal h3{margin-top:0}
+    .flex{display:flex;gap:12px}
+    .input,textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit}
+    .muted{color:var(--muted);font-size:13px}
+
+    /* responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .services{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:560px){
+      .grid{grid-template-columns:1fr}
+      nav{display:none}
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-<header>
-<div class="brand">
-<img class="logo-img" alt="Logo Codex Industry" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAKgCAYAAAABzDbiAAAABmJLR0QA/wD/AP+gvaeTAAAFQklEQVR4nO3dQQ3CMAwFQff/pW16U2Iu7HfIEpGZ5Nl9FhP8nwcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABs0c2bV63A8XuqmKehgzJ6vVW2oWx9d8uW1dF0PHzN8g0mW9GLyOuzM57V1bn8/5vcKo/GcFnqpjb8dLMpR9iHvWj48DADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAO8gARSc2d2l4vAAAAAElFTkSuQmCC">
-<div>
-<div style="font-weight:700">Codex Industry</div>
-<div style="font-size:12px;color:var(--muted)">Services pro — vidéo · graphisme · web</div>
-</div>
-</div>
-<nav>
-<a href="#services">Services</a>
-<a href="#portfolio">Portfolio</a>
-<a href="#pricing">Tarifs</a>
-<button class="btn" id="orderBtn">Commander</button>
-</nav>
-</header>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">CI</div>
+        <div>
+          <div style="font-weight:700">Codex Industry</div>
+          <div style="font-size:12px;color:var(--muted)">Services pro — vidéo · graphisme · web</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#pricing">Tarifs</a>
+        <button class="btn" id="orderBtn">Commander</button>
+      </nav>
+    </header>
 
-<main>
-<section class="hero">
-<div>
-<h1>Boostez votre communication avec des visuels et vidéos pro</h1>
-<p>Codex Industry propose des services professionnels de montage vidéo, création graphique et développement web sur mesure.</p>
-<div class="cards">
-<div class="card"><div style="font-size:20px">🎬</div><div><strong>Montage vidéo</strong><span class="muted">Montage, étalonnage, sous-titrage</span></div></div>
-<div class="card"><div style="font-size:20px">🎨</div><div><strong>Graphisme</strong><span class="muted">Miniatures, bannières, logos</span></div></div>
-<div class="card"><div style="font-size:20px">🧩</div><div><strong>Développement web</strong><span class="muted">Sites vitrines, landing pages</span></div></div>
-</div>
-<div style="margin-top:18px">
-<button class="btn" id="orderBtn2">Commander maintenant</button>
-<button class="ghost" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact</button>
-</div>
-</div>
-<aside>
-<div style="background:rgba(255,255,255,.02);padding:18px;border-radius:12px">
-<h3>Offre rapide</h3>
-<p class="muted">1 montage court (≤60s) + vignette — livraison 3 jours.</p>
-<div style="display:flex;gap:10px;margin-top:12px">
-<div style="flex:1"><strong>À partir de</strong><div class="muted">€49</div></div>
-<div style="flex:1;text-align:right"><button class="btn" id="quickOrder">Je veux</button></div>
-</div>
-</div>
-</aside>
-</section>
+    <main>
+      <section class="hero">
+        <div>
+          <h1>Boostez votre communication avec des visuels et vidéos pro</h1>
+          <p>Codex Industry propose des services professionnels de montage vidéo, création de miniatures / graphisme, et développement web sur mesure. Packs rapides, options express, et révisions incluses.</p>
+          <div class="cards">
+            <div class="card"><div style="font-size:20px">🎬</div><div><strong>Montage vidéo</strong><span class="muted">Montage, étalonnage, sous-titrage, vidéos YouTube/TikTok/ads</span></div></div>
+            <div class="card"><div style="font-size:20px">🎨</div><div><strong>Graphisme</strong><span class="muted">Miniatures, bannières, logos, templates</span></div></div>
+            <div class="card"><div style="font-size:20px">🧩</div><div><strong>Développement web</strong><span class="muted">Sites vitrines, landing pages, intégration CMS</span></div></div>
+          </div>
 
-<section id="services">
-<h2>Nos services</h2>
-<div class="services">
-<div class="service"><h3>Montage vidéo</h3><div class="features">Coupe, transitions, mixage audio, étalonnage, sous-titres.</div><p style="margin-top:12px"><button class="btn" onclick="openOrder('Montage vidéo')">Commander</button></p></div>
-<div class="service"><h3>Graphisme & Miniatures</h3><div class="features">Miniatures YouTube, bannières, logos, motion design.</div><p style="margin-top:12px"><button class="btn" onclick="openOrder('Graphisme')">Commander</button></p></div>
-<div class="service"><h3>Développement web</h3><div class="features">Site vitrine, landing page, SEO, intégration CMS.</div><p style="margin-top:12px"><button class="btn" onclick="openOrder('Développement web')">Commander</button></p></div>
-</div>
-</section>
+          <div style="margin-top:18px">
+            <button class="btn" id="orderBtn2">Commander maintenant</button>
+            <button class="ghost" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact</button>
+          </div>
+        </div>
 
-<section id="pricing">
-<h2>Tarifs</h2>
-<div class="pricing">
-<div class="price"><h4>Starter</h4><div class="amount">€49</div><div class="muted">Miniatures & petits montages</div><p><button class="btn" onclick="openOrder('Starter')">Choisir</button></p></div>
-<div class="price"><h4>Pro</h4><div class="amount">€129</div><div class="muted">Vidéos longues & packs branding</div><p><button class="btn" onclick="openOrder('Pro')">Choisir</button></p></div>
-<div class="price"><h4>Sur-mesure</h4><div class="amount">Sur devis</div><div class="muted">Projets complexes</div><p><button class="btn" onclick="openOrder('Sur-mesure')">Demander devis</button></p></div>
-</div>
-</section>
+        <aside>
+          <div style="background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:18px;border-radius:12px">
+            <h3>Offre rapide</h3>
+            <p class="muted">Starter video — 1 montage court (≤60s) + vignette — livraison 3 jours.</p>
+            <div style="display:flex;gap:10px;margin-top:12px">
+              <div style="flex:1"><strong>À partir de</strong><div class="muted">€49</div></div>
+              <div style="flex:1;text-align:right"><button class="btn" id="quickOrder">Je veux</button></div>
+            </div>
+          </div>
 
-<section id="portfolio" class="portfolio">
-<h2>Portfolio rapide</h2>
-<div class="grid">
-<div class="thumb">Montage — Pub produit</div>
-<div class="thumb">Miniature — Chaîne YT</div>
-<div class="thumb">Site vitrine — Agency</div>
-<div class="thumb">Motion 15s — Réseaux</div>
-<div class="thumb">Logo & brand kit</div>
-<div class="thumb">Landing page + CTA</div>
-</div>
-</section>
+          <div style="margin-top:16px;background:var(--card);padding:12px;border-radius:10px">
+            <div class="muted">Comment on travaille</div>
+            <ol class="muted" style="padding-left:16px"> 
+              <li>Brief & dépôt fichiers</li>
+              <li>Réalisation</li>
+              <li>Révisions & livraison</li>
+            </ol>
+          </div>
+        </aside>
+      </section>
 
-<section id="contact" style="margin-top:28px">
-<h2>Contactez-nous</h2>
-<p class="muted">Envoyez un brief ou demandez un devis — réponse sous 24–48 h.</p>
-<form id="contactForm" onsubmit="submitContact(event)">
-<input class="input" placeholder="Votre nom" required style="margin-bottom:8px">
-<input type="email" class="input" placeholder="Email" required style="margin-bottom:8px">
-<textarea rows="4" class="input" placeholder="Décrivez votre projet..." required style="margin-bottom:8px"></textarea>
-<button class="btn" type="submit">Envoyer</button>
-</form>
-</section>
+      <section id="services">
+        <h2>Nos services</h2>
+        <div class="services">
+          <div class="service">
+            <h3>Montage vidéo</h3>
+            <div class="features">Coupe, transitions, mixage audio, étalonnage, sous-titres, versions pour réseaux sociaux.</div>
+            <p style="margin-top:12px"><button class="btn" onclick="openOrder('Montage vidéo')">Commander</button></p>
+          </div>
 
-<footer>
-<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
-<div>© Codex Industry — Tous droits réservés</div>
-<div class="muted">Politique de confidentialité · Conditions</div>
-</div>
-</footer>
-</div>
+          <div class="service">
+            <h3>Graphisme & Miniatures</h3>
+            <div class="features">Miniatures YouTube, bannières, logos, motion design court, packs branding.</div>
+            <p style="margin-top:12px"><button class="btn" onclick="openOrder('Graphisme')">Commander</button></p>
+          </div>
 
-<div class="modal-back" id="modalBack">
-<div class="modal">
-<h3>Commander un service</h3>
-<p class="muted" id="selectedService">Choisir un service...</p>
-<form id="orderForm" onsubmit="submitOrder(event)">
-<input class="input" id="clientName" placeholder="Nom complet" required style="margin-bottom:8px">
-<input type="email" class="input" id="clientEmail" placeholder="Email" required style="margin-bottom:8px">
-<select class="input" id="serviceSelect" style="margin-bottom:8px">
-<option>Montage vidéo</option><option>Graphisme</option><option>Développement web</option>
-</select>
-<textarea class="input" id="brief" rows="3" placeholder="Décrivez votre brief..." required style="margin-bottom:8px"></textarea>
-<div style="display:flex;gap:8px;justify-content:flex-end">
-<button type="button" class="ghost" onclick="closeModal()">Annuler</button>
-<button class="btn" type="submit">Envoyer</button>
-</div>
-</form>
-</div>
-</div>
+          <div class="service">
+            <h3>Développement web</h3>
+            <div class="features">Site vitrine, landing page, optimisation SEO basique, intégration CMS (WordPress).</div>
+            <p style="margin-top:12px"><button class="btn" onclick="openOrder('Développement web')">Commander</button></p>
+          </div>
+        </div>
+      </section>
 
-<script>
-const modalBack=document.getElementById('modalBack');const selectedService=document.getElementById('selectedService');
-function openOrder(s){selectedService.textContent=s;document.getElementById('serviceSelect').value=s;modalBack.style.display='flex'}
-function closeModal(){modalBack.style.display='none'}
-document.getElementById('orderBtn').onclick=()=>openOrder('Montage vidéo');
-document.getElementById('orderBtn2').onclick=()=>openOrder('Graphisme');
-document.getElementById('quickOrder').onclick=()=>openOrder('Starter');
-function submitOrder(e){e.preventDefault();alert('Merci — votre demande a été envoyée !');closeModal()}
-function submitContact(e){e.preventDefault();alert('Message envoyé. Merci !');e.target.reset()}
-document.addEventListener('keydown',ev=>{if(ev.key==='Escape')closeModal()});
-</script>
+      <section id="pricing">
+        <h2>Tarifs & packs</h2>
+        <div class="pricing">
+          <div class="price">
+            <h4>Starter</h4>
+            <div class="amount">€49</div>
+            <div class="muted">Idéal pour miniatures et petits montages</div>
+            <ul class="muted">
+              <li>1 révision</li>
+              <li>Livraison 3–5 jours</li>
+            </ul>
+            <p><button class="btn" onclick="openOrder('Starter')">Choisir</button></p>
+          </div>
+          <div class="price">
+            <h4>Pro</h4>
+            <div class="amount">€129</div>
+            <div class="muted">Pour vidéos longues, packs et branding</div>
+            <ul class="muted">
+              <li>3 révisions</li>
+              <li>Livraison 5 jours</li>
+            </ul>
+            <p><button class="btn" onclick="openOrder('Pro')">Choisir</button></p>
+          </div>
+          <div class="price">
+            <h4>Sur-mesure</h4>
+            <div class="amount">Sur devis</div>
+            <div class="muted">Projets complexes, développement et intégration</div>
+            <p><button class="btn" onclick="openOrder('Sur-mesure')">Demander devis</button></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="portfolio" class="portfolio">
+        <h2>Portfolio rapide</h2>
+        <div class="grid">
+          <div class="thumb">Montage — Pub produit</div>
+          <div class="thumb">Miniature — Chaîne YT</div>
+          <div class="thumb">Site vitrine — Agency</div>
+          <div class="thumb">Motion 15s — Réseaux</div>
+          <div class="thumb">Logo & brand kit</div>
+          <div class="thumb">Landing page + CTA</div>
+        </div>
+      </section>
+
+      <section id="contact" style="margin-top:28px">
+        <h2>Contactez-nous</h2>
+        <div style="display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:12px">
+          <div>
+            <p class="muted">Envoyez un brief ou demandez un devis — on répond généralement en 24–48h (jours ouvrés).</p>
+            <form id="contactForm" onsubmit="submitContact(event)">
+              <div style="margin-bottom:8px"><input required class="input" name="name" placeholder="Votre nom"></div>
+              <div style="margin-bottom:8px"><input required type="email" class="input" name="email" placeholder="Email"></div>
+              <div style="margin-bottom:8px"><textarea required rows="5" class="input" name="message" placeholder="Décrivez votre projet..."></textarea></div>
+              <div><button class="btn" type="submit">Envoyer</button></div>
+            </form>
+          </div>
+
+          <aside style="background:var(--card);padding:16px;border-radius:12px">
+            <div class="muted">Infos</div>
+            <p style="margin:8px 0">Email : codexindustry.web@gmail.com</p>
+            <p style="margin:8px 0">Localisation : Europe</p>
+            <p class="muted">Vous voulez un appel ? Indiquez votre fuseau horaire et vos dispos.</p>
+          </aside>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>© Codex Industry — Tous droits réservés</div>
+        <div class="muted">Politique de confidentialité · Conditions · Paiement sécurisé</div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-back" id="modalBack">
+    <div class="modal" role="dialog" aria-modal="true">
+      <h3>Commander un service</h3>
+      <p class="muted" id="selectedService">Choisir un service...</p>
+      <form id="orderForm" onsubmit="submitOrder(event)">
+        <div style="margin-bottom:8px"><input class="input" id="clientName" name="clientName" placeholder="Nom complet" required></div>
+        <div style="margin-bottom:8px"><input class="input" id="clientEmail" name="clientEmail" type="email" placeholder="Email" required></div>
+        <div style="margin-bottom:8px"><select class="input" id="serviceSelect" name="service">
+          <option>Montage vidéo</option>
+          <option>Graphisme</option>
+          <option>Développement web</option>
+        </select></div>
+        <div style="margin-bottom:8px"><textarea class="input" id="brief" name="brief" rows="4" placeholder="Décrivez votre brief..." required></textarea></div>
+        <div style="display:flex;gap:8px;justify-content:flex-end">
+          <button type="button" class="ghost" onclick="closeModal()">Annuler</button>
+          <button class="btn" type="submit">Envoyer la demande</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // modal
+    const modalBack = document.getElementById('modalBack');
+    const selectedService = document.getElementById('selectedService');
+    function openOrder(service){
+      selectedService.textContent = service || 'Commande';
+      document.getElementById('serviceSelect').value = service || 'Montage vidéo';
+      modalBack.style.display = 'flex';
+      document.getElementById('clientName').focus();
+    }
+    function closeModal(){ modalBack.style.display = 'none'; }
+    document.getElementById('orderBtn').addEventListener('click', ()=>openOrder('Montage vidéo'));
+    document.getElementById('orderBtn2').addEventListener('click', ()=>openOrder('Graphisme'));
+    document.getElementById('quickOrder').addEventListener('click', ()=>openOrder('Starter'));
+
+    // order submit (demo) — adapt to backend
+    function submitOrder(e){
+      e.preventDefault();
+      const data = {
+        name: document.getElementById('clientName').value,
+        email: document.getElementById('clientEmail').value,
+        service: document.getElementById('serviceSelect').value,
+        brief: document.getElementById('brief').value,
+      };
+      console.log('Order',data);
+      alert('Merci — votre demande a été envoyée. Nous reviendrons vers vous par email. (demo)');
+      closeModal();
+      e.target.reset();
+    }
+
+    // contact form demo
+    function submitContact(e){
+      e.preventDefault();
+      const f = e.target;
+      console.log('Contact', {name:f.name.value,email:f.email.value,message:f.message.value});
+      alert('Merci — message envoyé. (demo)');
+      f.reset();
+    }
+
+    // accessibility: close modal on escape
+    document.addEventListener('keydown', (ev)=>{
+      if(ev.key === 'Escape') closeModal();
+    });
+
+    // small progressive enhancement: scroll reveal
+    window.addEventListener('load', ()=>{
+      document.querySelectorAll('section').forEach((s,i)=>{s.style.opacity=0;s.style.transform='translateY(8px)';setTimeout(()=>{s.style.transition='all .6s ease';s.style.opacity=1;s.style.transform='none'},120*i)})
+    });
+  </script>
 </body>
 </html>
+
